@@ -38,9 +38,9 @@ public class MyArrayCrossOver extends AbstractCrossover<byte[]>{
 		}
         List<byte[]> result = new ArrayList<byte[]>(2);
         
-        if(firstBetterFitness(parent1, ans1) && rng.nextDouble()<0.9)
-        	result.add(parent1);
-        else 
+//        if(firstBetterFitness(parent1, ans1) && rng.nextDouble()<0.8)
+//        	result.add(parent1);
+//        else 
         	result.add(ans1);
         
         if(firstBetterFitness(parent2, ans2) && rng.nextDouble()<0.9)

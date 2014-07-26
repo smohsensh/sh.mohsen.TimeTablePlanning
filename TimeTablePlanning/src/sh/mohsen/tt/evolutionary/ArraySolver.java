@@ -33,10 +33,10 @@ public class ArraySolver {
 	int intervalsNum ;
 	int groupsNum ;
 
-	final double mutationProbability = 0.08;
-	final private int crossOverPoints = 3;
+	final double mutationProbability = 0.24;
+	final private int maxCrossOverPoints = 22;
 	final private int terminationMinutes=70;
-	final private int populationSize=220;
+	final private int populationSize=250;
 	
 	
 	File freetimes ;
@@ -81,7 +81,7 @@ public class ArraySolver {
 //		ByteArrayCrossover crossover = new ByteArrayCrossover(
 //				new IntegerGenerator(crossOverPoints), new ProbabilityGenerator(0.9));
 		final FitnessEvaluator<byte[]> fitnessEvaluator = new ArrayEvaluator(teachersNum, intervalsNum, groupsNum, l);
-		MyArrayCrossOver crossover = new MyArrayCrossOver(fitnessEvaluator,new IntegerGenerator(crossOverPoints), teachersNum, intervalsNum, groupsNum);
+		MyArrayCrossOver crossover = new MyArrayCrossOver(fitnessEvaluator,new IntegerGenerator(maxCrossOverPoints), teachersNum, intervalsNum, groupsNum);
 		
 		ArrayMutation mutation = new ArrayMutation(teachersNum, intervalsNum, groupsNum , new Probability(mutationProbability));
 		
@@ -134,7 +134,7 @@ public class ArraySolver {
 	private void printResult(byte[] result) throws IOException {
 		Writer writer = null ;
 		
-		writer = new FileWriter(new File(System.currentTimeMillis() + " time: " + terminationMinutes +" cr point: " + crossOverPoints ));
+		writer = new FileWriter(new File(System.currentTimeMillis() + " time: " + terminationMinutes +"max cr point: " + maxCrossOverPoints ));
 	
 		for (int tea = 0; tea < teachersNum; tea++) {
 			for (int inter = 0; inter < intervalsNum; inter++) {
