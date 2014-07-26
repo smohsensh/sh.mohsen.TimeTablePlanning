@@ -44,7 +44,7 @@ public class ArrayMutation implements EvolutionaryOperator<byte[]> {
 		}
 
 		if (rng.nextDouble() < 0.3)
-			shuffleTeachers(arr, rng);
+			shuffleIntevals(arr, rng);
 
 		int numOfTeachersToMutate = rng.nextInt(11);
 		for (int i = 0; i < numOfTeachersToMutate; i++) {
@@ -91,12 +91,12 @@ public class ArrayMutation implements EvolutionaryOperator<byte[]> {
 			int firstIndex = 0;
 			int secondIndex = 0;
 			for (int i = 0; i < inum * gnum; i++) {
-				if (in[firstIndex * inum * gnum + i] == 1
+				if (in[firstTeacher * inum * gnum + i] == 1
 						&& rng.nextDouble() * i < 0.8)
 					firstIndex = i;
 			}
 			for (int i = 0; i < inum * gnum; i++) {
-				if (in[secondIndex * inum * gnum + i] == 1
+				if (in[secondTeacher * inum * gnum + i] == 1
 						&& rng.nextDouble() < 0.5)
 					secondIndex = i;
 			}

@@ -35,7 +35,7 @@ public class ArraySolver {
 
 	final double mutationProbability = 0.24;
 	final private int maxCrossOverPoints = 22;
-	final private int terminationMinutes=70;
+	final private int terminationMinutes=120;
 	final private int populationSize=250;
 	
 	
@@ -134,7 +134,7 @@ public class ArraySolver {
 	private void printResult(byte[] result) throws IOException {
 		Writer writer = null ;
 		
-		writer = new FileWriter(new File(System.currentTimeMillis() + " time: " + terminationMinutes +"max cr point: " + maxCrossOverPoints ));
+		writer = new FileWriter(new File("gen_" + System.currentTimeMillis() + "_time_" + terminationMinutes +"_max_cr_point:_" + maxCrossOverPoints ));
 	
 		for (int tea = 0; tea < teachersNum; tea++) {
 			for (int inter = 0; inter < intervalsNum; inter++) {
