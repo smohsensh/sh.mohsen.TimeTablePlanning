@@ -35,7 +35,7 @@ public class ArraySolver {
 
 	final double mutationProbability = 0.24;
 	final private int maxCrossOverPoints = 22;
-	final private int terminationMinutes=120;
+	final private int terminationMinutes=0;
 	final private int populationSize=250;
 	
 	
@@ -117,7 +117,13 @@ public class ArraySolver {
 					
 				});
 		
-		byte[] result = engine.evolve(populationSize, 0, new TargetFitness(10, false),new ElapsedTime(terminationMinutes*60000));
+		byte[] result=null;
+		
+		if(terminationMinutes ==0)
+			result = engine.evolve(populationSize, 0, new TargetFitness(0, false));
+		else
+			result = engine.evolve(populationSize, 0, new TargetFitness(0, false),new ElapsedTime(terminationMinutes*60000));
+			
 		try {
 			printResult(result);
 		} catch (IOException e) {

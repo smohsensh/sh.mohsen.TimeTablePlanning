@@ -11,6 +11,8 @@ import org.jacop.core.IntVar;
 import org.jacop.core.Store;
 import org.jacop.search.DepthFirstSearch;
 import org.jacop.search.IndomainMin;
+import org.jacop.search.IndomainRandom;
+import org.jacop.search.MostConstrainedStatic;
 import org.jacop.search.Search;
 import org.jacop.search.SelectChoicePoint;
 import org.jacop.search.SimpleSelect;
@@ -18,6 +20,7 @@ import org.jacop.search.SmallestDomain;
 
 import sh.mohsen.tt.general.Loader;
 import sh.mohsen.tt.general.TeacherPair;
+import sh.mohsen.tt.numbergen.IntegerGenerator;
 
 public class CSPSolver {
 
@@ -107,12 +110,14 @@ public class CSPSolver {
 				}
 			}
 		}
-		BooleanVar [] shit = new BooleanVar[teacherNum*intervalsNum*groupsNum];
-		for (int i = 0; i < shit.length; i++) {
-			shit[i] = oneDvars.get(i);
+		BooleanVar [] ouch = new BooleanVar[teacherNum*intervalsNum*groupsNum];
+		for (int i = 0; i < ouch.length; i++) {
+			ouch[i] = oneDvars.get(i);
 		}
+		IntegerGenerator intgen = new IntegerGenerator(Integer.MAX_VALUE);
 		IntVar cost = new IntVar(store, 0, 100); 
-		SelectChoicePoint<BooleanVar> scp = new SimpleSelect<BooleanVar>(shit, new SmallestDomain<BooleanVar>(), new IndomainMin<BooleanVar>());
+		SelectChoicePoint<BooleanVar> scp = new SimpleSelect<BooleanVar>
+		(ouch, new MostConstrainedStatic<BooleanVar>(), new IndomainRandom<BooleanVar>(intgen.nextValue()));
 		boolean result = res.labeling(store, scp, cost);
 		System.out.println(result);
 		

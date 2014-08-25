@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>jacop</name>
+			<type>2</type>
+			<location>/media/mohsen/9AEE707EEE70548B/Users/mohsen/Documents/Scholar/queue/proj/csp/jacop</location>
+		</link>
+	</linkedResources>
 </projectDescription>

@@ -6,6 +6,6 @@
 	<classpathentry kind="lib" path="/media/mohsen/9AEE707EEE70548B/Users/mohsen/Documents/Scholar/queue/proj/watchmaker-framework-0.7.1/lib/jcommon-1.0.16.jar"/>
 	<classpathentry kind="lib" path="/media/mohsen/9AEE707EEE70548B/Users/mohsen/Documents/Scholar/queue/proj/watchmaker-framework-0.7.1/lib/google-collect-1.0.jar"/>
 	<classpathentry kind="lib" path="/media/mohsen/9AEE707EEE70548B/Users/mohsen/Documents/Scholar/queue/proj/watchmaker-framework-0.7.1/lib/uncommons-maths-1.2.1.jar"/>
-	<classpathentry kind="lib" path="/home/mohsen/workspace/CSP/jcop-4.1.0.jar"/>
+	<classpathentry kind="lib" path="/home/mohsen/workspace/CSP/jcop-4.1.0.jar" sourcepath="/media/mohsen/9AEE707EEE70548B/Users/mohsen/Documents/Scholar/queue/proj/csp/jacop/JaCoP-3.2/JaCoP"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

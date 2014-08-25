@@ -27,28 +27,8 @@ public class ArrayEvaluator  implements FitnessEvaluator<byte[]>{
 	
 	@Override
 	public double getFitness(byte[] candidate, List<? extends byte[]> population) {
-		humanly = new byte[tnum][inum][gnum];
-		
-		if(candidate.length != tnum*inum*gnum)
-			try {
-				throw new Exception("wtf?");
-			} catch (Exception e) {
-				e.printStackTrace();
-				return Double.MAX_VALUE;
-			}
-		
 		double fine = 1;
-		int numOfOnes=0;
-		for (int i = 0; i < tnum; i++) {
-			for (int j = 0; j < inum; j++) {
-				for (int k = 0; k < gnum; k++) {
-					byte x = candidate[i*(inum*gnum) + j*gnum + k];
-					humanly[i][j][k] =x;
-					if(x==1)
-						numOfOnes++;
-	 			}
-			}
-		}
+		int numOfOnes = covnertHumanly(candidate);
 		
 		if(numOfOnes > gnum*inum)
 			fine+= Math.abs(numOfOnes -gnum*inum)*8000;
@@ -68,13 +48,13 @@ public class ArrayEvaluator  implements FitnessEvaluator<byte[]>{
 							fine++;
 					}
 				}
-				
 				if(teachersINspecificTime >1)
 					fine+= 1000*teachersINspecificTime;
 				if(teachersINspecificTime <1)
 					fine+= 1000;
 			}
 		}
+		
 		
 		// true number of intervals are assigned to each teacher ('jim' in doc)
 		// and no teacher assigned same interval for different groups ('d' in doc)
@@ -132,6 +112,32 @@ public class ArrayEvaluator  implements FitnessEvaluator<byte[]>{
 		}
 		return fine;
 	}
+
+	private int covnertHumanly(byte[] candidate) {
+		humanly = new byte[tnum][inum][gnum];
+		
+		if(candidate.length != tnum*inum*gnum)
+			try {
+				throw new Exception("wtf?");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		int numOfOnes=0;
+		for (int i = 0; i < tnum; i++) {
+			for (int j = 0; j < inum; j++) {
+				for (int k = 0; k < gnum; k++) {
+					byte x = candidate[i*(inum*gnum) + j*gnum + k];
+					humanly[i][j][k] =x;
+					if(x==1)
+						numOfOnes++;
+	 			}
+			}
+		}
+		return numOfOnes;
+	}
+	
+	
 	private int getSumofIntervalForTeacherAndGroup(int teacher, int gr) {
 		int sumOfIntervalsForTeacerAndGroup =0;
 		for (int inter = 0; inter < inum; inter++) {
