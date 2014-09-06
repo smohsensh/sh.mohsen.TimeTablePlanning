@@ -31,6 +31,12 @@ public class runMinConf {
 	
 	File out = new File("csp_" + System.currentTimeMillis()/10000 +"_t_" + teachersNum +"_g_" +groupsNum);
 	Writer wr = new FileWriter(out);
+	
+	for (int group = 0; group < groupsNum; group++) {
+		for (int inter = 0; inter < intervalsNum; inter++) {
+			System.out.println("gr " + group+ " in " + inter + " : " + ans[inter][group] );
+		}
+	}
 //	
 //	for (int tea = 0; tea < teachersNum ; tea++) {
 //		for (int in = 0; in < intervalsNum; in++) {

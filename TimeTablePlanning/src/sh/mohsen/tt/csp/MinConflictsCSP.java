@@ -20,26 +20,41 @@ public class MinConflictsCSP {
 	
 	public Integer[][] solve(){
 		int previousConflicts = getConfilictsNumber(humanly);
+		int noChangeSteps = 0;
+		long counter =0;
 		while(true){
-			System.out.println("confs = " +previousConflicts );
+			if(counter % 1000 ==0)
+				System.out.println(counter +": confs = " +previousConflicts );
 			if(previousConflicts==0)
 				return humanly;
-			int tIndex= rng.nextInt(tnum);
 			int iIndex= rng.nextInt(inum);
 			int gIndex= rng.nextInt(gnum);
-			int lastValue = humanly[iIndex][gIndex];
-			
-			int bestTeacher=0;
+			Integer lastVlaue = humanly[iIndex][gIndex];
+			int bestTeacher=rng.nextInt(tnum);
 			for (int teach = 0; teach < tnum; teach++) {
-				
 				humanly[iIndex][gIndex] = teach;
 				int conf1 = getConfilictsNumber(humanly);
 				if(conf1 < previousConflicts){
 					previousConflicts = conf1;
 					bestTeacher  = teach;
 				}
+				
+				
+				if(noChangeSteps >150){
+					for (int i = 0; i < rng.nextInt( ((int) Math.log10(counter))*3); i++) {
+					humanly[rng.nextInt(inum)][rng.nextInt(gnum)] = rng.nextInt(tnum);
+					humanly[rng.nextInt(inum)][rng.nextInt(gnum)] = rng.nextInt(tnum);
+					humanly[rng.nextInt(inum)][rng.nextInt(gnum)] = rng.nextInt(tnum);
+					}
+					noChangeSteps =0;
+				}
+					
+				humanly[iIndex][gIndex] = lastVlaue;
 			}
+			if(humanly[iIndex][gIndex] != null && humanly[iIndex][gIndex] ==bestTeacher)
+				noChangeSteps ++;
 			humanly[iIndex][gIndex] = bestTeacher;
+			counter ++;
 		}
 	}
 	
@@ -94,6 +109,8 @@ public class MinConflictsCSP {
 			for (int inter = 0; inter < inum; inter++) {
 				ArrayList<Integer> teachersInThisInterval = new ArrayList<Integer>();
 				for (int gr = 0; gr < gnum; gr++) {
+					if(humanly[inter][gr]==null)
+						continue;
 					int t = humanly[inter][gr];
 					numberOfIntervalsForTeacher[t] ++; 
 					if(teachersInThisInterval.contains(t))
@@ -147,7 +164,7 @@ public class MinConflictsCSP {
 		
 		int sumOfIntervalsForTeacerAndGroup =0;
 		for (int inter = 0; inter < inum; inter++) {
-			if(humanly[inter][gr] == teacher)
+			if(humanly[inter][gr] !=null && humanly[inter][gr] == teacher)
 				sumOfIntervalsForTeacerAndGroup ++;
 		}
 		return sumOfIntervalsForTeacerAndGroup;
